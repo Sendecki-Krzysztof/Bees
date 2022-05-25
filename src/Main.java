@@ -6,6 +6,7 @@ public class Main {
         Game game = new Game();
 
         game.autoPlayGame();
+        //game.playGame(input);
 
     }
 }

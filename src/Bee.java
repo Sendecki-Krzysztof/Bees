@@ -1,5 +1,6 @@
 public abstract class Bee {
     private int multiplier = 1;
+    public int timeAdjustment = 30;
     private int value = 0;
     private double variation = .1;
     private double offset;
@@ -7,7 +8,7 @@ public abstract class Bee {
     private double production;
 
     int calcValue() {
-        return (int)(multiplier * ((production * 60) + 100));
+        return (int)(multiplier * ((production * timeAdjustment)));
     }
     public void printBeeInfo() {
         System.out.println("Production: " + String.format("%,.2f", this.getProduction()) + ".Its value is: " + this.value);
