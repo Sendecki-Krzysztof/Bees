@@ -2,10 +2,11 @@ import static java.lang.Double.max;
 import static java.lang.Double.min;
 
 public class BlueBee extends Bee {
-    private int valueMultiplier = 1;
+    private final int valueMultiplier = 2;
 
     BlueBee() {
         this.setMultiplier(valueMultiplier);
+        this.setBase(1);
         this.setOffset(Math.random());
         this.setVariation((getBase() + getOffset()) / 60);
         this.setValue(this.calcValue());
@@ -17,12 +18,17 @@ public class BlueBee extends Bee {
         this.setValue(calcValue());
     }
     @Override
-    public void printType() {
+    public void printBeeType() {
         System.out.print("Blue Bee ");
     }
 
     @Override
     public Bee breed(Bee other) {
-        return new BlueBee(min(this.getOffset(), other.getOffset()), (max(this.getOffset(), other.getOffset()) + Math.random() * this.getVariation()));
+        if (other instanceof BlueBee) {
+            return new BlueBee(min(this.getOffset(), other.getOffset()), (max(this.getOffset(), other.getOffset()) + Math.random() * this.getVariation()));
+        } else {
+            System.out.println("Invalid Kind of bee!");
+            return null;
+        }
     }
 }

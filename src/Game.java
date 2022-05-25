@@ -15,16 +15,16 @@ public class Game {
         this.Bees.add(temp);
         return temp;
     }
-    public Bee makeBee(){
+    public Bee generateNewBee(){
         Bee temp = new BlueBee();
         this.Bees.add(temp);
         return temp;
     }
     public void printBees() {
         for(int i = 0; i < this.Bees.size(); i++) {
-            this.Bees.get(i).printType();
+            this.Bees.get(i).printBeeType();
             System.out.print(i + "'s ");
-            this.Bees.get(i).printInfo();
+            this.Bees.get(i).printBeeInfo();
         }
     }
     public void playGame(Scanner input) {
@@ -68,7 +68,7 @@ public class Game {
             System.out.println();
             count++;
 
-            if(Bees.get(0).getValue() > 1000) {
+            if(Bees.get(0).getValue() > 100) {
                 break;
             }
 
