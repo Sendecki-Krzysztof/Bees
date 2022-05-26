@@ -17,6 +17,7 @@ public abstract class Bee {
         System.out.print(beeType + " ");
     }
 
+
     public void calcProduction(double base) {
         production = Math.random() + base;
     }
