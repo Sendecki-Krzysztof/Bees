@@ -52,5 +52,5 @@ public abstract class Bee {
     public int getBuyingValue() {
         return buyingValue;
     }
-    public double getOffset() { return offset; };
+    public double getOffset() { return offset; }
 }
