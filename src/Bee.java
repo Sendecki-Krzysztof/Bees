@@ -17,8 +17,7 @@ public abstract class Bee {
     }
 
     public void calcProduction(double base) {
-        double currProduction = Math.random() + base;
-        production = currProduction;
+        production = Math.random() + base;
     }
     public void calcSellingValue(int multiplier) {
         double defaultSellingPrice = 50;
