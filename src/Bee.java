@@ -1,59 +1,56 @@
-public abstract class Bee {
-    private int multiplier = 1;
-    public int timeAdjustment = 30;
-    private int value = 0;
-    private double variation = .1;
-    private double offset;
-    private double base = .5;
-    private double production;
+import static java.lang.Double.max;
+import static java.lang.Double.min;
 
-    int calcValue() {
-        return (int)(multiplier * ((production * timeAdjustment)));
-    }
+public abstract class Bee {
+    public String beeType = "Bee";
+    private int sellingValue = 0;
+    private int buyingValue = 0;
+    private double production = 0;
+    private double offset = 0;
+
+
     public void printBeeInfo() {
-        System.out.println("Production: " + String.format("%,.2f", this.getProduction()) + ".Its value is: " + this.value);
+        System.out.println("Production: " + String.format("%,.2f", this.getProduction()) + ".Its Selling value is: " + this.sellingValue);
     }
     public void printBeeType() {
-        System.out.print("Yellow Bee ");
+        System.out.print(beeType + " ");
     }
+
+    public void calcProduction(double base) {
+        double currProduction = Math.random() + base;
+        production = currProduction;
+    }
+    public void calcSellingValue(int multiplier) {
+        double defaultSellingPrice = 50;
+        sellingValue = (int) ((production * multiplier) + defaultSellingPrice);
+    }
+    public void calcBuyingValue(int multiplier) {
+        double defaultBuyingPrice = 200;
+        sellingValue = (int) ((production * multiplier) + defaultBuyingPrice);
+    }
+
+    public double calcParentProduction(double firstBeeProduction, double secondBeeProduction) {
+        double max = max(firstBeeProduction, secondBeeProduction);
+        double min = min(firstBeeProduction, secondBeeProduction);
+
+        return ((Math.random() * (max - min)) + min);
+    }
+
+    public void calcOffset(double min, double max) {
+        offset = ((Math.random() * (max - min)) + min);
+    }
+
     abstract public Bee breed(Bee other);
 
-    // ------ Setter and Getter Statements Below ------
-
-    public double getVariation() {
-        return variation;
-    }
-    public void setVariation(double variation) {
-        this.variation = variation;
-    }
-    public int getValue() {
-        return value;
-    }
-    public void setValue(int value) {
-        this.value = value;
-    }
+    /* ---------- Getters ---------- */
     public double getProduction() {
         return production;
     }
-    public void setProduction(double production) {
-        this.production = production;
+    public int getSellingValue() {
+        return sellingValue;
     }
-    public double getOffset() {
-        return offset;
+    public int getBuyingValue() {
+        return buyingValue;
     }
-    public void setOffset(double offset) {
-        this.offset = offset;
-    }
-    public int getMultiplier() {
-        return multiplier;
-    }
-    public void setMultiplier(int multiplier) {
-        this.multiplier = multiplier;
-    }
-    public double getBase() {
-        return base;
-    }
-    public void setBase(double base) {
-        this.base = base;
-    }
+    public double getOffset() { return offset; };
 }

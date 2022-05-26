@@ -68,7 +68,7 @@ public class Game {
             System.out.println();
             count++;
 
-            if(Bees.get(0).getValue() > 1000) {
+            if(Bees.get(0).getSellingValue() > 1000) {
                 break;
             }
 

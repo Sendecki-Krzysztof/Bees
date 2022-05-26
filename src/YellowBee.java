@@ -1,28 +1,25 @@
 import static java.lang.Double.max;
 import static java.lang.Double.min;
 
-public class YellowBee extends  Bee{
+public class YellowBee extends Bee{
     private final int valueMultiplier = 1;
-    private final int productionMultiplier = 1;
-
 
     YellowBee() {
-        this.setMultiplier(valueMultiplier);
-        this.setBase(1);
-        this.setOffset(Math.random());
-        this.setProduction((productionMultiplier * (getBase() + getOffset()) / timeAdjustment));
-        this.setValue(this.calcValue());
-    }
-    private YellowBee(double min, double max) {
-        this.setMultiplier(valueMultiplier);
-        this.setOffset((Math.random() * (max - min)) + min);
-        this.setProduction((productionMultiplier * (getBase() + getOffset()) / timeAdjustment));
-        this.setValue(calcValue());
-    }
+        this.beeType = "Yellow Bee";
+        this.calcOffset(0, 1);
+        double baseProduction = 1;
+        this.calcProduction(baseProduction);
+        this.calcBuyingValue(valueMultiplier);
+        this.calcSellingValue(valueMultiplier);
 
-    @Override
-    public void printBeeType() {
-        System.out.print("Yellow Bee ");
+    }
+    private YellowBee(double minOffset, double maxOffset, double productionFormParents) {
+        this.beeType = "Yellow Bee";
+        this.calcOffset(minOffset, maxOffset);
+        double baseProduction = productionFormParents + this.getOffset();
+        this.calcProduction(baseProduction);
+        this.calcSellingValue(valueMultiplier);
+        this.calcBuyingValue(valueMultiplier);
     }
 
     @Override
@@ -31,7 +28,9 @@ public class YellowBee extends  Bee{
         if (!(other instanceof YellowBee)) {
             System.err.println("Invalid Kind of bee!");
         }
-        return new YellowBee(min(this.getOffset(), other.getOffset()),
-                (max(this.getOffset(), other.getOffset()) + Math.random() + this.getVariation()));
+        double productionFromParents = calcParentProduction(this.getProduction(), other.getProduction());
+        double minOffset = min(this.getOffset(), other.getOffset());
+        double maxOffset = max(this.getOffset(), other.getOffset());
+        return new YellowBee(minOffset, maxOffset, productionFromParents);
     }
 }
