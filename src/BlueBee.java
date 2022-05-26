@@ -14,6 +14,7 @@ public class BlueBee extends Bee {
 
     }
     private BlueBee(double minOffset, double maxOffset, double productionFormParents) {
+
         this.beeType = "Blue Bee";
         this.calcOffset(minOffset, maxOffset);
         double baseProduction = productionFormParents + this.getOffset();

@@ -10,7 +10,8 @@ public abstract class Bee {
 
 
     public void printBeeInfo() {
-        System.out.println("Production: " + String.format("%,.2f", this.getProduction()) + ".Its Selling value is: " + this.sellingValue);
+        System.out.println("Production: " + String.format("%,.2f", this.getProduction()) +
+                ". Its Selling value is: " + this.sellingValue + "! Its Buying Price is: " + this.getBuyingValue());
     }
     public void printBeeType() {
         System.out.print(beeType + " ");
@@ -25,7 +26,7 @@ public abstract class Bee {
     }
     public void calcBuyingValue(int multiplier) {
         double defaultBuyingPrice = 200;
-        sellingValue = (int) ((production * multiplier) + defaultBuyingPrice);
+        buyingValue = (int) ((production * multiplier) + defaultBuyingPrice);
     }
 
     public double calcParentProduction(double firstBeeProduction, double secondBeeProduction) {
