@@ -1,22 +1,36 @@
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Game {
     List<Bee> Bees = new ArrayList<>();
+    Display display;
+    private Rectangle rectangle;
 
-    Game() {
+    Game(int width, int height) {
+        this.display = new Display(width,height);
+        rectangle = new Rectangle(0,0, 50, 50);
+
         Bees.add(new Bee());
         Bees.add(new Bee());
     }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public void update(){
+        rectangle.setLocation((int) rectangle.getX() + 1, (int) rectangle.getY() + 1);
+    }
+
+    public void render(){
+        display.render(this);
+    }
+
 
     public Bee birthBee(Bee Bee1, Bee Bee2) {
         Bee temp = Bee1.breed(Bee2);
-        this.Bees.add(temp);
-        return temp;
-    }
-    public Bee generateNewBee(){
-        Bee temp = new Bee();
         this.Bees.add(temp);
         return temp;
     }
@@ -44,7 +58,6 @@ public class Game {
 
         }
     }
-
     private void bestBirth(){
         Bee firstBee = this.Bees.get(0);
         Bee secondBee = this.Bees.get(1);

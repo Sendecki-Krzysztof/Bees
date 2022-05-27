@@ -2,6 +2,8 @@ import static java.lang.Double.max;
 import static java.lang.Double.min;
 
 public class Bee {
+    private Position beePosition;
+    private Size beeSize;
     public String beeType;
     private int sellingValue = 0;
     private int buyingValue = 0;
@@ -11,6 +13,8 @@ public class Bee {
 
 
     Bee() {
+        this.beeSize = new Size(50, 50);
+        this.beePosition = new Position(50, 50);
         this.beeType = "Bee";
         this.calcOffset(0, 1);
         double baseProduction = 1;
@@ -20,6 +24,8 @@ public class Bee {
 
     }
     private Bee(double minOffset, double maxOffset, double productionFormParents) {
+        this.beeSize = new Size(50, 50);
+        this.beePosition = new Position(50, 50);
         this.beeType = "Bee";
         this.calcOffset(minOffset, maxOffset);
         double baseProduction = productionFormParents + this.getOffset();
