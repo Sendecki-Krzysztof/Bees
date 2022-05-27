@@ -6,8 +6,8 @@ public class Game {
     List<Bee> Bees = new ArrayList<>();
 
     Game() {
-        Bees.add(new BlueBee());
-        Bees.add(new BlueBee());
+        Bees.add(new Bee());
+        Bees.add(new Bee());
     }
 
     public Bee birthBee(Bee Bee1, Bee Bee2) {
@@ -16,7 +16,7 @@ public class Game {
         return temp;
     }
     public Bee generateNewBee(){
-        Bee temp = new BlueBee();
+        Bee temp = new Bee();
         this.Bees.add(temp);
         return temp;
     }

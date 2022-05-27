@@ -1,13 +1,32 @@
 import static java.lang.Double.max;
 import static java.lang.Double.min;
 
-public abstract class Bee {
-    public String beeType = "Bee";
+public class Bee {
+    public String beeType;
     private int sellingValue = 0;
     private int buyingValue = 0;
     private double production = 0;
     private double offset = 0;
+    private int valueMultiplier = 1;
 
+
+    Bee() {
+        this.beeType = "Bee";
+        this.calcOffset(0, 1);
+        double baseProduction = 1;
+        this.calcProduction(baseProduction);
+        this.calcBuyingValue(valueMultiplier);
+        this.calcSellingValue(valueMultiplier);
+
+    }
+    private Bee(double minOffset, double maxOffset, double productionFormParents) {
+        this.beeType = "Bee";
+        this.calcOffset(minOffset, maxOffset);
+        double baseProduction = productionFormParents + this.getOffset();
+        this.calcProduction(baseProduction);
+        this.calcSellingValue(valueMultiplier);
+        this.calcBuyingValue(valueMultiplier);
+    }
 
     public void printBeeInfo() {
         System.out.println("Production: " + String.format("%,.2f", this.getProduction()) +
@@ -41,7 +60,12 @@ public abstract class Bee {
         offset = ((Math.random() * (max - min)) + min);
     }
 
-    abstract public Bee breed(Bee other);
+    public Bee breed(Bee other){
+        double productionFromParents = calcParentProduction(this.getProduction(), other.getProduction());
+        double minOffset = min(this.getOffset(), other.getOffset());
+        double maxOffset = max(this.getOffset(), other.getOffset());
+        return new Bee(minOffset, maxOffset, productionFromParents);
+    }
 
     /* ---------- Getters ---------- */
     public double getProduction() {
